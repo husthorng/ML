@@ -16,3 +16,11 @@ for axi, center in zip(ax.flat, centers):
    axi.set(xticks=[], yticks=[])
    axi.imshow(center, interpolation='nearest', cmap=plt.cm.binary)
 plt.show()
+
+from scipy.stats import mode
+labels = np.zeros_like(clusters)
+for i in range(10):
+   mask = (clusters == i)
+   labels[mask] = mode(digits.target[mask])[0]
+from sklearn.metrics import accuracy_score
+print(accuracy_score(digits.target, labels))
